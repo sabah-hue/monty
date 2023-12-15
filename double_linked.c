@@ -35,7 +35,7 @@ stack_t *add_dnodeint(stack_t **head, const int n)
 {
 	stack_t *new_head;
 
-	if (*head == NULL)
+	if (head == NULL)
 		return (NULL);
 	new_head = malloc(sizeof(stack_t));
 	if (new_head == NULL)
