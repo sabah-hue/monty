@@ -57,6 +57,7 @@ void which_opcode(char *splits, unsigned int which_line, stack_t **stack)
 		{"div", _div},
 		{"mul", _mul},
 		{"mod", _mod},
+		{"pchar", _pchar},
 		{NULL, NULL}
 	};
 
@@ -73,5 +74,10 @@ void which_opcode(char *splits, unsigned int which_line, stack_t **stack)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", which_line, splits);
 		exit(EXIT_FAILURE);
+	}
+	if (splits[0] == '#')
+	{
+		handle_opcode[7].f(stack, which_line);
+		return;
 	}
 }
