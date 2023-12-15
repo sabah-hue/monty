@@ -24,7 +24,7 @@ int main(int ac, char **av)
 		fprintf(stderr, "Error: Can't open file <%s>\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-	_getline(file_ptr);
+	read_line(file_ptr);
 	fclose(file_ptr);
-	exit(EXIT_SUCCESS);
+	return (0);
 }

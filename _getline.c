@@ -1,14 +1,15 @@
 #include "monty.h"
+#include <stdio.h>
 
 /**
- * _getline - read from open file
+ * read_line - read from open file
  *
  * Description: Function that read from file
  * @file_ptr: pointer to open file
  *
  * Return: nothing
  */
-void _getline(FILE *file_ptr)
+void read_line(FILE *file_ptr)
 {
 	char *user_data = NULL;
 	size_t buffer_size = 0;
@@ -22,10 +23,10 @@ void _getline(FILE *file_ptr)
 		chars_num = getline(&user_data, &buffer_size, file_ptr);
 		if (chars_num == -1)
 			break;
-		splits = strtok(user_data, " \n\t");
 		which_line++;
+		splits = strtok(user_data, " \n\t");
 		if (splits)
-			which_opcode(splits, which_line, stack);
+			which_opcode(splits, which_line, &stack);
 	}
 	free(user_data);
 	_free_stack(&stack);
@@ -41,29 +42,32 @@ void _getline(FILE *file_ptr)
  *
  * Return: nothong
  */
-void which_opcode(char *splits, unsigned int which_line, stack_t *stack)
+void which_opcode(char *splits, unsigned int which_line, stack_t **stack)
 {
-	int i = 0;
+	unsigned int i = 0;
 	instruction_t handle_opcode[] = {
 		{"push", _push},
 		{"pall", _pall},
 		{"pint", _pint},
 		{"pop", _pop},
 		{"swap", _swap},
+		{"add", _add},
 		{"nop", _nop},
 		{NULL, NULL}
 	};
 
 	while (handle_opcode[i].opcode != NULL)
 	{
-		if (!strcmp(token,  handle_opcode[i].opcode))
+		if (!strcmp(splits,  handle_opcode[i].opcode))
 		{
-			 handle_opcode[i].f(stack, which_line);
-			 return;
+			handle_opcode[i].f(stack, which_line);
+			return;
 		}
 		i++;
 	}
-	fprintf(stderr, "L%d: unknown instruction %s\n", which_line, token);
-	_free_stack(stack);
-	exit(EXIT_FAILURE);
+	if (splits[0] != '#')
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", which_line, splits);
+		exit(EXIT_FAILURE);
+	}
 }
