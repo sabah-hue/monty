@@ -76,7 +76,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	}
 	for (i = 0; token[i] != '\0'; i++)
 	{
-		if (!isdigit(token[i]))
+		if (token[i] != '-' && !isdigit(token[i]))
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
