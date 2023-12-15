@@ -52,6 +52,7 @@ void which_opcode(char *splits, unsigned int which_line, stack_t **stack)
 		{"pop", _pop},
 		{"swap", _swap},
 		{"add", _add},
+		{"sub", _sub},
 		{"nop", _nop},
 		{NULL, NULL}
 	};
