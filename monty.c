@@ -21,7 +21,7 @@ int main(int ac, char **av)
 	file_ptr = fopen(av[1], "r");
 	if (file_ptr == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file <%s>\n", av[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 	read_line(file_ptr);
