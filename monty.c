@@ -13,7 +13,7 @@ int main(int ac, char **av)
 {
 	FILE *file_ptr;
 
-	if (ac < 2)
+	if (ac != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
